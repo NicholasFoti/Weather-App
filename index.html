@@ -9,79 +9,88 @@
 </head>
 <body>
     <section id="main-card">
-        <div class="container">
-            <div class="search-box">
-                <i class="fa-solid fa-location-dot fa-lg location-icon"></i>                
-                <input type="text" placeholder="Enter your city...">
-                <button class="search-button" type="button"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
-            </div>
-
-            <div class="weather-box">
-                <div class="box">
-                    <div class="info-weather">
-                        <div class="weather">
-                            <img src="assets/images/cloud.png" alt="weather">
-                            <p class="temperature">0<span>°C</span></p>
-                            <p class="description">Broken Clouds</p>
+        <div class="main-container">
+            <div class="container">
+                <div class="search-box">
+                    <i class="fa-solid fa-location-dot fa-lg location-icon"></i>                
+                    <input type="text" placeholder="Enter your city...">
+                    <button class="search-button" type="button"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+                </div>
+                <div class="weather-box">
+                    <div class="box">
+                        <div class="info-weather">
+                            <div class="weather">
+                                <img src="assets/images/cloud.png" alt="weather">
+                                <p class="temperature">0<span>°C</span></p>
+                                <p class="description">Broken Clouds</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="weather-details">
-                <div class="humidity">
-                    <i class="fa-solid fa-water fa-2xl"></i>
-                    <div class="text">
-                        <span>0%</span>
-                        <p>Humidity</p>
+                <div class="weather-details">
+                    <div class="humidity">
+                        <i class="fa-solid fa-water fa-2xl"></i>
+                        <div class="text">
+                            <span>0%</span>
+                            <p>Humidity</p>
+                        </div>
+                    </div>                             
+                    <div class="wind">
+                        <i class="fa-solid fa-wind fa-2xl"></i>
+                        <div class="text">
+                            <span>0Km/h</span>
+                            <p>Wind Speed</p>
+                        </div>
+                    </div>                             
+                </div>
+                <div class="not-found">
+                    <div class="box">
+                        <img src="assets/images/404.png">
+                        <p>Oops! Location not found!</p>
                     </div>
-                </div>                             
-                <div class="wind">
-                    <i class="fa-solid fa-wind fa-2xl"></i>
-                    <div class="text">
-                        <span>0Km/h</span>
-                        <p>Wind Speed</p>
-                    </div>
-                </div>                             
-            </div>
-
-            <div class="not-found">
-                <div class="box">
-                    <img src="assets/images/404.png">
-                    <p>Oops! Location not found!</p>
-                </div>
-            </div>
-            
-            <div class="forcast">
-                <div class="individual">
-                    <h2>Mon</h2>
-                    <img src="assets/images/clear.png">
-                    <p class="temperature">16</p><span>°C</span>
-                </div>
-                <div class="individual">
-                    <h2>Tue</h2>
-                    <img src="assets/images/clear.png">
-                    <p class="temperature">16</p><span>°C</span>
-                </div>
-                <div class="individual">
-                    <h2>Wed</h2>
-                    <img src="assets/images/clear.png">
-                    <p class="temperature">16</p><span>°C</span>
-                </div>
-                <div class="individual">
-                    <h2>Thur</h2>
-                    <img src="assets/images/clear.png">
-                    <p class="temperature">16</p><span>°C</span>
-                </div>
-                <div class="individual">
-                    <h2>Fri</h2>
-                    <img src="assets/images/clear.png">
-                    <p class="temperature">16</p><span>°C</span>
                 </div>
             </div>
         </div>
     </section>
-    
+    <section id="right-container">
+        <div class="forcast">
+            <div class="day 1">
+                <img src="assets/images/cloud.png">
+                <div class="day-items">
+                    <p class="day-p">Mon</p>
+                    <p class="temperature1">0<span>°C</span></p>
+                </div>
+            </div>
+            <div class="day 2">
+                <img src="assets/images/cloud.png">
+                <div class="day-items">
+                    <p class="day-p">Tue</p>
+                    <p class="temperature2">0<span>°C</span></p>
+                </div>
+            </div>
+            <div class="day 3">
+                <img src="assets/images/cloud.png">
+                <div class="day-items">
+                    <p class="day-p">Wed</p>
+                    <p class="temperature3">0<span>°C</span></p>
+                </div>
+            </div>
+            <div class="day 4">
+                <img src="assets/images/cloud.png">
+                <div class="day-items">
+                    <p class="day-p">Thur</p>
+                    <p class="temperature4">0<span>°C</span></p>
+                </div>
+            </div>
+            <div class="day 5">
+                <img src="assets/images/cloud.png">
+                <div class="day-items">
+                    <p class="day-p">Fri</p>
+                    <p class="temperature5">0<span>°C</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 <script src="/app.js"></script>
 </html>

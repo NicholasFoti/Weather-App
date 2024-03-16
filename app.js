@@ -42,10 +42,6 @@ search.addEventListener('click', () => {
             case 'Clear':
                 image.src = 'assets/images/clear.png';
                 break;
-                
-            case 'Clear':
-                image.src = 'assets/images/clear.png';
-                break;
 
             case 'Rain':
                 image.src = 'assets/images/rain.png';
@@ -80,9 +76,27 @@ search.addEventListener('click', () => {
     fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${APIKey}`).then(response => response.json()).then(json => {
         console.log(json);
 
-        const day = document.querySelector('.forcast h2');
-        const imageForcast = document.querySelector('.forcast img');
-        const temperatureForcast = document.querySelector('.forcast .temperature');
+        const day1 = document.querySelector('.forcast day-p');
+        const day2 = document.querySelector('.forcast day-p');
+        const day3 = document.querySelector('.forcast day-p');
+        const day4 = document.querySelector('.forcast day-p');
+        const day5 = document.querySelector('.forcast day-p');
+        const imageForcast1 = document.querySelector('.forcast img');
+        const imageForcast2 = document.querySelector('.forcast img');
+        const imageForcast3 = document.querySelector('.forcast img');
+        const imageForcast4 = document.querySelector('.forcast img');
+        const imageForcast5 = document.querySelector('.forcast img');
+        const temperatureForcast1 = document.querySelector('.forcast .temperature1');
+        const temperatureForcast2 = document.querySelector('.forcast .temperature2');
+        const temperatureForcast3 = document.querySelector('.forcast .temperature3');
+        const temperatureForcast4 = document.querySelector('.forcast .temperature4');
+        const temperatureForcast5 = document.querySelector('.forcast .temperature5');
+
+        temperatureForcast1.innerHTML = `${parseInt(json.list[7].main.temp)}<span>°C</span>`;
+        temperatureForcast2.innerHTML = `${parseInt(json.list[15].main.temp)}<span>°C</span>`;
+        temperatureForcast3.innerHTML = `${parseInt(json.list[23].main.temp)}<span>°C</span>`;
+        temperatureForcast4.innerHTML = `${parseInt(json.list[31].main.temp)}<span>°C</span>`;
+        temperatureForcast5.innerHTML = `${parseInt(json.list[39].main.temp)}<span>°C</span>`;
 
 
         
