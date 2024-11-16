@@ -3,7 +3,8 @@ const container = document.querySelector(".container");
 const search = document.querySelector(".search-box button");
 const weatherBox = document.querySelector(".weather-box");
 const weatherDetails = document.querySelector(".weather-details");
-const weatherForcast = document.querySelector(".forcast");
+const weatherForecast = document.querySelector(".forecast");
+console.log(weatherForecast);
 const error404 = document.querySelector(".not-found");
 
 const APIKey = "ef76aab462cba09c2832465d36350b80";
@@ -17,12 +18,18 @@ searchButton.addEventListener('click', () => {
         .then(response => response.json())
         .then(data => {
             if (data.cod != '200') {
-                container.style.height = '400px';
+                container.style.height = '500px';
                 weatherBox.classList.remove('active');
-                weatherForcast.classList.remove('active');
                 weatherDetails.classList.remove('active');
+                weatherForecast.classList.remove('active');
                 error404.classList.add('active');
                 return;
+            }
+            else{
+                error404.classList.remove('active');
+                weatherBox.classList.add('active');
+                weatherDetails.classList.add('active');
+                weatherForecast.classList.add('active');
             }
 
             document.getElementById('weather-icon').src = getWeatherIcon(data.weather[0].main);

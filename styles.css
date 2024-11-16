@@ -61,7 +61,7 @@ body {
     border-radius: 50px;
     color: white;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: 0.3s ease-in-out;
 }
 
 .search-box button:hover {
@@ -70,6 +70,24 @@ body {
 
 .weather-box img {
     width: 100px;
+}
+
+.weather-box,
+.weather-details,
+.forecast {
+    opacity: 0; 
+    transform: translateX(50px); 
+    max-height: 0; 
+    overflow: hidden; 
+    transition: all 0.3s ease-in-out;
+}
+
+.weather-box.active,
+.weather-details.active,
+.forecast.active {
+    opacity: 1;
+    transform: translateX(0); 
+    max-height: 500px; 
 }
 
 .temperature {
@@ -82,7 +100,11 @@ body {
     margin-bottom: 10px;
 }
 
-.weather-details {
+.weather-details{
+    display: none;
+}
+
+.weather-details.active {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
@@ -94,13 +116,30 @@ body {
 
 .not-found {
     display: none;
+    opacity: 0;
+    transform: scale(0.9); /* Start slightly smaller */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.forecast hidden{
+.not-found.active {
+    display: block;
+    opacity: 1;
+    transform: scale(1); /* Grow to full size */
+}
+
+.not-found img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Ensure it is displayed */
+    margin: 0 auto; /* Center the image */
+}
+
+
+.forecast{
     display: none;
 }
 
-.forecast {
+.forecast.active {
     margin-left: 40px;
     display: flex;
     flex-direction: column;
