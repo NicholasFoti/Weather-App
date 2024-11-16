@@ -1,3 +1,4 @@
+const searchButton = document.getElementById('search-btn');
 const container = document.querySelector(".container");
 const search = document.querySelector(".search-box button");
 const weatherBox = document.querySelector(".weather-box");
@@ -5,107 +6,78 @@ const weatherDetails = document.querySelector(".weather-details");
 const weatherForcast = document.querySelector(".forcast");
 const error404 = document.querySelector(".not-found");
 
-search.addEventListener('click', () => {
+const APIKey = "ef76aab462cba09c2832465d36350b80";
 
-    const APIKey = "ef76aab462cba09c2832465d36350b80";
-    const city = document.querySelector('.search-box input').value;
-    console.log(city);
+searchButton.addEventListener('click', () => {
+    const city = document.getElementById('city-input').value;
+    if (city === '') return;
 
-    if (city == '')
-        return;
+    // Fetch current weather data
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.cod != '200') {
+                container.style.height = '400px';
+                weatherBox.classList.remove('active');
+                weatherForcast.classList.remove('active');
+                weatherDetails.classList.remove('active');
+                error404.classList.add('active');
+                return;
+            }
 
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`).then(response => response.json()).then(json => {
+            document.getElementById('weather-icon').src = getWeatherIcon(data.weather[0].main);
+            document.getElementById('temperature').innerHTML = `${Math.round(data.main.temp)}<span>°C</span>`;
+            document.getElementById('description').innerHTML = data.weather[0].description;
+            document.getElementById('humidity').innerHTML = `${data.main.humidity}%`;
+            document.getElementById('wind-speed').innerHTML = `${data.wind.speed} Km/h`;
+        });
 
-        if (json.cod == '404') {
-            container.style.height = '400px';
-            weatherBox.classList.remove('active');
-            weatherForcast.classList.remove('active');
-            weatherDetails.classList.remove('active');
-            error404.classList.add('active');
-            return;
-        }
-
-        container.style.height = '555px';
-        weatherBox.classList.add('active');
-        weatherForcast.classList.add('active');
-        weatherDetails.classList.add('active');
-        error404.classList.remove('active');
-
-        console.log(json);
-        const image = document.querySelector('.weather-box img');
-        const temperature = document.querySelector('.weather-box .temperature');
-        const description = document.querySelector('.weather-box .description');
-        const humidity = document.querySelector('.weather-details .humidity span');
-        const wind = document.querySelector('.weather-details .wind span');
-    
-        switch (json.weather[0].main){
-            case 'Clear':
-                image.src = 'assets/images/clear.png';
-                break;
-
-            case 'Rain':
-                image.src = 'assets/images/rain.png';
-                break;
-
-            case 'Snow':
-                image.src = 'assets/images/snow.png';
-                break;
-
-            case 'Clouds':
-                image.src = 'assets/images/cloud.png';
-                break;
-
-            case 'Mist':
-                image.src = 'assets/images/mist.png';
-                break;
-            
-            case 'Haze':
-                image.src = 'assets/images/mist.png';
-                break;
-            
-            default:
-                image.src = 'assets/images/cloud.png';
-        }
-
-        temperature.innerHTML = `${parseInt(json.main.temp)}<span>°C</span>`;
-        description.innerHTML = `${json.weather[0].description}`;
-        humidity.innerHTML = `${parseInt(json.main.humidity)}%`;
-        wind.innerHTML = `${parseInt(json.wind.speed)}Km/h`;
-    });
-
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${APIKey}`).then(response => response.json()).then(json => {
-        console.log(json);
-
-        const day1 = document.querySelector('.forcast day-p');
-        const day2 = document.querySelector('.forcast day-p');
-        const day3 = document.querySelector('.forcast day-p');
-        const day4 = document.querySelector('.forcast day-p');
-        const day5 = document.querySelector('.forcast day-p');
-        const imageForcast1 = document.querySelector('.forcast img');
-        const imageForcast2 = document.querySelector('.forcast img');
-        const imageForcast3 = document.querySelector('.forcast img');
-        const imageForcast4 = document.querySelector('.forcast img');
-        const imageForcast5 = document.querySelector('.forcast img');
-        const temperatureForcast1 = document.querySelector('.forcast .temperature1');
-        const temperatureForcast2 = document.querySelector('.forcast .temperature2');
-        const temperatureForcast3 = document.querySelector('.forcast .temperature3');
-        const temperatureForcast4 = document.querySelector('.forcast .temperature4');
-        const temperatureForcast5 = document.querySelector('.forcast .temperature5');
-
-        temperatureForcast1.innerHTML = `${parseInt(json.list[7].main.temp)}<span>°C</span>`;
-        temperatureForcast2.innerHTML = `${parseInt(json.list[15].main.temp)}<span>°C</span>`;
-        temperatureForcast3.innerHTML = `${parseInt(json.list[23].main.temp)}<span>°C</span>`;
-        temperatureForcast4.innerHTML = `${parseInt(json.list[31].main.temp)}<span>°C</span>`;
-        temperatureForcast5.innerHTML = `${parseInt(json.list[39].main.temp)}<span>°C</span>`;
-
-
-        
-
-
-
-    });
+    // Fetch 5-day forecast
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${APIKey}`)
+        .then(response => response.json())
+        .then(data => {
+            updateForecast(data.list);
+        });
 });
 
+function updateForecast(list) {
+    const forecastElements = [
+        { tempId: 'forecast-temp1', iconId: 'forecast-icon1', dayId: 'day-name1' },
+        { tempId: 'forecast-temp2', iconId: 'forecast-icon2', dayId: 'day-name2' },
+        { tempId: 'forecast-temp3', iconId: 'forecast-icon3', dayId: 'day-name3' },
+        { tempId: 'forecast-temp4', iconId: 'forecast-icon4', dayId: 'day-name4' },
+        { tempId: 'forecast-temp5', iconId: 'forecast-icon5', dayId: 'day-name5' },
+    ];
 
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const today = new Date().getDay(); // Get current day as a number (0-6 for Sun-Sat)
 
-7, 15, 23, 31, 39
+    forecastElements.forEach((element, index) => {
+        const forecastData = list[index * 8];  // 3-hour interval, so 8 entries per day
+
+        document.getElementById(element.tempId).innerHTML = `${Math.round(forecastData.main.temp)}<span>°C</span>`;
+        document.getElementById(element.iconId).src = getWeatherIcon(forecastData.weather[0].main);
+
+        // Calculate the correct day of the week
+        const dayOfWeekIndex = (today + index + 1) % 7;  // Rolling over the days of the week
+        document.getElementById(element.dayId).innerHTML = daysOfWeek[dayOfWeekIndex];
+    });
+}
+
+function getWeatherIcon(weather) {
+    switch (weather) {
+        case 'Clear':
+            return 'assets/images/clear.png';
+        case 'Rain':
+            return 'assets/images/rain.png';
+        case 'Snow':
+            return 'assets/images/snow.png';
+        case 'Clouds':
+            return 'assets/images/cloud.png';
+        case 'Mist':
+        case 'Haze':
+            return 'assets/images/mist.png';
+        default:
+            return 'assets/images/cloud.png';
+    }
+}
