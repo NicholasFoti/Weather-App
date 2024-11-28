@@ -9,6 +9,27 @@ const error404 = document.querySelector(".not-found");
 
 const APIKey = "ef76aab462cba09c2832465d36350b80";
 
+const themeToggle = document.getElementById('theme-toggle');
+const toggleLabel = document.querySelector('.toggle-label');
+
+// Check for saved theme preference
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+    themeToggle.checked = true;
+    toggleLabel.textContent = 'Light Mode';
+}
+
+themeToggle.addEventListener('change', () => {
+    document.body.classList.toggle('light-theme');
+    toggleLabel.textContent = document.body.classList.contains('light-theme') ? 'Light Mode' : 'Dark Mode';
+    
+    // Save theme preference
+    localStorage.setItem('theme', 
+        document.body.classList.contains('light-theme') ? 'light' : 'dark'
+    );
+});
+
 searchButton.addEventListener('click', () => {
     const city = document.getElementById('city-input').value;
     if (city === '') return;
@@ -18,7 +39,6 @@ searchButton.addEventListener('click', () => {
         .then(response => response.json())
         .then(data => {
             if (data.cod != '200') {
-                container.style.height = '500px';
                 weatherBox.classList.remove('active');
                 weatherDetails.classList.remove('active');
                 weatherForecast.classList.remove('active');

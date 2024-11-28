@@ -1,0 +1,36 @@
+/* Styles for screens smaller than 768px */
+@media (max-width: 768px) {
+    .container {
+      width: 100%;
+      max-width: 400px;
+    }
+    .forecast {
+      width: 100%;
+      max-width: 400px;
+    }
+  }
+  
+@media (max-width: 1024px) {
+    .container.weather-shown {
+        transform: translateX(0);
+    }
+
+    .forecast {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .forecast.active {
+        right: auto;
+    }
+
+    .main-container {
+        flex-direction: column;
+        padding: 20px;
+    }
+}
+  

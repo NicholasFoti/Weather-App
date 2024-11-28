@@ -4,98 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mediaqueries.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <title>Weather App</title>
 </head>
 <body>
-    <section id="main-card">
-        <div class="main-container">
-            <div class="container">
-                <!-- Search Box -->
-                <div class="search-box">
-                    <i class="fa-solid fa-location-dot fa-lg location-icon"></i>                
-                    <input type="text" id="city-input" placeholder="Enter your city...">
-                    <button class="search-button" type="button" id="search-btn">
-                        <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-                    </button>
-                </div>
-                <!-- Weather Box -->
-                <div class="weather-box">
-                    <div class="box">
-                        <div class="info-weather">
-                            <div class="weather">
-                                <img id="weather-icon" src="assets/images/cloud.png" alt="weather">
-                                <p class="temperature" id="temperature">0<span>°C</span></p>
-                                <p class="description" id="description">Broken Clouds</p>
+    <header class="app-header">
+        <h1>Weather App</h1>
+        <div class="theme-toggle-wrapper">
+            <label class="theme-switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider round"></span>
+            </label>
+            <span class="toggle-label">Dark Mode</span>
+        </div>    
+    </header>
+    <div class="main-container">
+        <section id="main-card">
+            <div class="weather-container">
+                <div class="container" data-aos="fade-up">
+                    <!-- Search Box -->
+                    <div class="search-box">
+                        <i class="fa-solid fa-location-dot fa-lg location-icon"></i>
+                        <input type="text" id="city-input" placeholder="Enter your city..." aria-label="City Name">
+                        <button class="search-button" type="button" id="search-btn" aria-label="Search">
+                            <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                        </button>
+                    </div>
+                    <!-- Loading Spinner -->
+                    <div id="loading-spinner" style="display: none;">
+                        <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
+                    </div>
+                    <!-- Error Message -->
+                    <div class="not-found">
+                        <img src="assets/images/404.png" alt="Location Not Found">
+                        <p id="error-message">Oops! Location not found!</p>
+                    </div>
+                    <!-- Weather Box -->
+                    <div class="weather-box">
+                        <div class="box">
+                            <div class="info-weather">
+                                <div class="weather">
+                                    <img id="weather-icon" src="assets/images/cloud.png" alt="weather">
+                                    <p class="temperature" id="temperature">0<span>°C</span></p>
+                                    <p class="description" id="description">Broken Clouds</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Weather Details -->
-                <div class="weather-details">
-                    <div class="humidity">
-                        <i class="fa-solid fa-water fa-2xl"></i>
-                        <div class="text">
-                            <span id="humidity">0%</span>
-                            <p>Humidity</p>
-                        </div>
-                    </div>                             
-                    <div class="wind">
-                        <i class="fa-solid fa-wind fa-2xl"></i>
-                        <div class="text">
-                            <span id="wind-speed">0Km/h</span>
-                            <p>Wind Speed</p>
-                        </div>
-                    </div>                             
-                </div>
-                <!-- Error Box -->
-                <div class="not-found">
-                    <img src="assets/images/404.png">
-                    <p>Oops! Location not found!</p>
+                    <!-- Weather Details -->
+                    <div class="weather-details">
+                        <div class="humidity">
+                            <i class="fa-solid fa-water fa-2xl"></i>
+                            <div class="text">
+                                <span id="humidity">0%</span>
+                                <p>Humidity</p>
+                            </div>
+                        </div>                             
+                        <div class="wind">
+                            <i class="fa-solid fa-wind fa-2xl"></i>
+                            <div class="text">
+                                <span id="wind-speed">0Km/h</span>
+                                <p>Wind Speed</p>
+                            </div>
+                        </div>                          
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section id="right-container">
-        <!-- Forecast Section -->
-        <div class="forecast">
-            <div class="day" id="day1">
-                <img src="assets/images/cloud.png" id="forecast-icon1">
-                <div class="day-items">
-                    <p class="day-p" id="day-name1">Mon</p>
-                    <p class="temperature1" id="forecast-temp1">0<span>°C</span></p>
+        </section>
+        <section id="right-container" data-aos="fade-left">
+            <!-- Forecast Section -->
+            <div class="forecast">
+                <div class="day" id="day1">
+                    <img src="assets/images/cloud.png" id="forecast-icon1" alt="Forecast Icon">
+                    <div class="day-items">
+                        <p class="day-p" id="day-name1">Mon</p>
+                        <p class="temperature1" id="forecast-temp1">0<span>°C</span></p>
+                    </div>
+                </div>
+                <div class="day" id="day2">
+                    <img src="assets/images/cloud.png" id="forecast-icon2" alt="Forecast Icon">
+                    <div class="day-items">
+                        <p class="day-p" id="day-name2">Tue</p>
+                        <p class="temperature2" id="forecast-temp2">0<span>°C</span></p>
+                    </div>
+                </div>
+                <div class="day" id="day3">
+                    <img src="assets/images/cloud.png" id="forecast-icon3" alt="Forecast Icon">
+                    <div class="day-items">
+                        <p class="day-p" id="day-name3">Wed</p>
+                        <p class="temperature3" id="forecast-temp3">0<span>°C</span></p>
+                    </div>
+                </div>
+                <div class="day" id="day4">
+                    <img src="assets/images/cloud.png" id="forecast-icon4" alt="Forecast Icon">
+                    <div class="day-items">
+                        <p class="day-p" id="day-name4">Thu</p>
+                        <p class="temperature4" id="forecast-temp4">0<span>°C</span></p>
+                    </div>
+                </div>
+                <div class="day" id="day5">
+                    <img src="assets/images/cloud.png" id="forecast-icon5" alt="Forecast Icon">
+                    <div class="day-items">
+                        <p class="day-p" id="day-name5">Fri</p>
+                        <p class="temperature5" id="forecast-temp5">0<span>°C</span></p>
+                    </div>
                 </div>
             </div>
-            <div class="day" id="day2">
-                <img src="assets/images/cloud.png" id="forecast-icon2">
-                <div class="day-items">
-                    <p class="day-p" id="day-name2">Tue</p>
-                    <p class="temperature2" id="forecast-temp2">0<span>°C</span></p>
-                </div>
-            </div>
-            <div class="day" id="day3">
-                <img src="assets/images/cloud.png" id="forecast-icon3">
-                <div class="day-items">
-                    <p class="day-p" id="day-name3">Wed</p>
-                    <p class="temperature3" id="forecast-temp3">0<span>°C</span></p>
-                </div>
-            </div>
-            <div class="day" id="day4">
-                <img src="assets/images/cloud.png" id="forecast-icon4">
-                <div class="day-items">
-                    <p class="day-p" id="day-name4">Thu</p>
-                    <p class="temperature4" id="forecast-temp4">0<span>°C</span></p>
-                </div>
-            </div>
-            <div class="day" id="day5">
-                <img src="assets/images/cloud.png" id="forecast-icon5">
-                <div class="day-items">
-                    <p class="day-p" id="day-name5">Fri</p>
-                    <p class="temperature5" id="forecast-temp5">0<span>°C</span></p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
     <script src="/app.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 </html>
