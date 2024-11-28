@@ -15,6 +15,7 @@
     --button-background: #ff4b2b;
     --container-border: 2px solid rgba(255, 255, 255, 0.1);
     --button-hover: #ff9068;
+    --header-background: rgb(54, 54, 54);
 }
 
 /* Light Theme */
@@ -25,6 +26,7 @@ body.light-theme {
     --container-border: 2px solid rgba(0, 0, 0, 0.1);
     --button-background: #3498db;
     --button-hover: #2980b9;
+    --header-background: white;
 }
 
 body {
@@ -275,22 +277,6 @@ body.light-theme .toggle-label {
     color: var(--text-color);
 }
 
-body.light-theme .app-header {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px 0;
-    background-color: white;
-    color: var(--text-color);
-    box-shadow: var(--box-shadow);
-    margin-bottom: 20px;
-    border-radius: 0 0 50px 50px;
-}
-
 .app-header {
     width: 100%;
     position: fixed;
@@ -300,9 +286,31 @@ body.light-theme .app-header {
     align-items: center;
     text-align: center;
     padding: 20px 0;
-    background-color: rgb(54, 54, 54);
+    background-color: var(--header-background);
     color: var(--text-color);
     box-shadow: var(--box-shadow);
     margin-bottom: 20px;
     border-radius: 0 0 50px 50px;
+}
+
+.app-footer{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 0;
+    border-radius: 50px 50px 0 0;
+    background-color: var(--header-background);
+    color: var(--text-color);
+}
+
+.app-footer a{
+    color: var(--button-background);
+    text-decoration: none;
+}
+
+.app-footer i{
+    margin-left: 5px;
 }
